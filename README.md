@@ -3,7 +3,7 @@
 Turns Euro NCAP protocols into an **ontology-based knowledge graph** and answers questions with
 **GraphRAG**: connected graph facts plus cited text passages.
 
-![GraphRAG answer](docs/graphrag_answer.png)
+![GraphRAG answer](screenshots/graphrag_answer.png)
 
 Plain RAG finds text that *sounds* similar to a question. A knowledge graph adds what is *connected*:
 which dummy a test uses, which criteria it measures, which assessment area it belongs to, even when
@@ -91,11 +91,11 @@ every dummy connected to the test, even when those facts sit on different pages.
 
 ### Focus view of one test
 
-![Focus view](docs/graph_focus.png)
+![Focus view](screenshots/graph_focus.png)
 
 ### Graph statistics
 
-![Statistics](docs/stats.png)
+![Statistics](screenshots/stats.png)
 
 ## Lessons learned
 
