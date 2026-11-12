@@ -84,7 +84,7 @@ and install the commented packages in `requirements.txt`.
 |---|---|---|
 | Answer | Hybrid III | Hybrid III, Hybrid III 50th, Q6, Q10 |
 | Sources | 1 page | 4 pages, linked through `USES` relations |
-| Response time | ~1.9 s | ~4.7 s |
+| Response time | ~5 s | ~20 s |
 
 Plain RAG only sees the few passages that sound most similar to the question. The graph knows
 every dummy connected to the test, even when those facts sit on different pages.
