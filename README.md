@@ -3,6 +3,8 @@
 Turns Euro NCAP protocols into an **ontology-based knowledge graph** and answers questions with
 **GraphRAG**: connected graph facts plus cited text passages.
 
+![GraphRAG answer](docs/graphrag_answer.png)
+
 Plain RAG finds text that *sounds* similar to a question. A knowledge graph adds what is *connected*:
 which dummy a test uses, which criteria it measures, which assessment area it belongs to, even when
 those facts sit on different pages or in different documents.
@@ -71,13 +73,34 @@ and install the commented packages in `requirements.txt`.
 
 | Metric | Value |
 |---|---|
-| Documents | _fill in_ |
-| Entities | _fill in_ |
-| Relations | _fill in_ |
-| Keyword coverage, RAG vs GraphRAG | _fill in_ |
+| Documents | 3 Euro NCAP protocols |
+| Entities | 158 (8 types) |
+| Relations | 178 (8 types) |
+| Triples rejected by ontology validation | 16 |
+
+**Example: "Which dummy is used in the frontal impact test?"**
+
+| | Plain RAG | GraphRAG |
+|---|---|---|
+| Answer | Hybrid III | Hybrid III, Hybrid III 50th, Q6, Q10 |
+| Sources | 1 page | 4 pages, linked through `USES` relations |
+| Response time | ~1.9 s | ~4.7 s |
+
+Plain RAG only sees the few passages that sound most similar to the question. The graph knows
+every dummy connected to the test, even when those facts sit on different pages.
+
+### Focus view of one test
+
+![Focus view](docs/graph_focus.png)
+
+### Graph statistics
+
+![Statistics](docs/stats.png)
 
 ## Lessons learned
 
-The hardest part was not building the graph but keeping names consistent: the LLM writes
-"AEB", "Autonomous Emergency Braking" and "AEB system" for the same concept. `normalize.py`
-merges these with an alias table and rejects triples that violate the ontology.
+The hardest part was not building the graph but keeping names consistent: in the first run the
+LLM produced "Post-Crash Safety", "Post-Crash" and "Post-crash Safety" as three separate nodes, and
+"Overall Rating Scheme" next to "Euro NCAP Overall Rating Scheme". `normalize.py` now merges names
+case-insensitively, strips the "Euro NCAP" prefix, applies an alias table, and rejects triples that
+violate the ontology (16 in the full run).
